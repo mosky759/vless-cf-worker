@@ -14,7 +14,7 @@ for (let i = 0; i < 256; ++i) {
     byteToHex.push((i + 256).toString(16).slice(1));
 }
 function unsafeStringify(arr, offset = 0) {
-    return (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase();
+    return (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]);
 }
 function stringify(arr, offset = 0) {
     const uuid = unsafeStringify(arr, offset);
@@ -198,7 +198,7 @@ var cf_worker_vless_default = {
     async fetch(request, env, ctx) {
         let address = "";
         let portWithRandomLog = "";
-        const userID = env.UUID || adc010e4-37ba-4650-9df1-8c2144a936d2"; // ENTER YOUR OWN UUID HERE
+        const userID = env.UUID || "adc010e4-37ba-4650-9df1-8c2144a936d2"; // ENTER YOUR OWN UUID HERE
         const isVaildUUID = validate_default(userID);
         const log = (info, event) => {
             console.log(`[${address}:${portWithRandomLog}] ${info}`, event || "");
@@ -295,12 +295,12 @@ var cf_worker_vless_default = {
             remoteSocket.readable.pipeTo(
                 new WritableStream({
                     start() {
-                        if (webSocket.readyState === WebSocket.READY_STATE_OPEN) {
+                        if (webSocket.readyState === WebSocket.OPEN) {
                             webSocket.send(vlessResponseHeader);
                         }
                     },
                     async write(chunk, controller) {
-                        if (webSocket.readyState === WebSocket.READY_STATE_OPEN) {
+                        if (webSocket.readyState === WebSocket.OPEN) {
                             if (count++ > 2e4) {
                                 await delay2(1);
                             }
@@ -339,7 +339,7 @@ var cf_worker_vless_default = {
 };
 function safeCloseWebSocket2(ws) {
     try {
-        if (ws.readyState !== WebSocket.READY_STATE_CLOSED) {
+        if (ws.readyState !== WebSocket.CLOSED) {
             ws.close();
         }
     } catch (error) {
